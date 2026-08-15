@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16264A">
+<title>בר ודור באמסטרדם · 31.8–4.9.26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Secular+One&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16264A;
+  --delft:#21468B;
+  --delft-soft:#3A5FB0;
+  --oranje:#F26B21;
+  --flagred:#AE1C28;
+  --canal:#12715A;
+  --porcelain:#EDF1F8;
+  --paper:#FFFFFF;
+  --muted:#6B7893;
+  --line:#D8E0EE;
+  --shadow:0 2px 10px rgba(22,38,74,.07), 0 12px 30px rgba(22,38,74,.06);
+  --radius:18px;
+  --display:'Secular One', 'Heebo', system-ui, sans-serif;
+  --body:'Rubik','Assistant',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--body);
+  background:var(--porcelain);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  font-size:16px;line-height:1.55;
+  padding-bottom:calc(40px + env(safe-area-inset-bottom));
+  overflow-x:hidden;
+}
+body.locked{overflow:hidden}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;margin:0;letter-spacing:-.01em}
+a{color:var(--delft)}
+button{font-family:var(--body);cursor:pointer}
+input,textarea,select{font-family:var(--body);font-size:16px}
+:focus-visible{outline:3px solid var(--oranje);outline-offset:2px;border-radius:6px}
+.wrap{max-width:760px;margin:0 auto;padding:0 14px}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  background:var(--ink);color:#fff;
+  padding:calc(8px + env(safe-area-inset-top)) 14px 8px;
+  display:flex;align-items:center;gap:10px;
+  box-shadow:0 2px 14px rgba(22,38,74,.25);
+}
+.topbar .brand{font-family:var(--display);font-size:17px;line-height:1.2;flex:1;min-width:0}
+.topbar .brand small{display:block;font-family:var(--body);font-size:11px;opacity:.65;font-weight:300}
+.burger{
+  width:42px;height:42px;flex:0 0 42px;border:0;border-radius:12px;
+  background:rgba(255,255,255,.1);display:grid;place-content:center;gap:4px;
+}
+.burger span{display:block;width:19px;height:2px;background:#fff;border-radius:2px;transition:.25s}
+.burger.on span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.on span:nth-child(2){opacity:0}
+.burger.on span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.clocks{display:flex;gap:8px;font-size:11px;text-align:center}
+.clocks div{background:rgba(255,255,255,.1);border-radius:9px;padding:3px 7px;min-width:52px}
+.clocks b{display:block;font-size:14px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.clocks span{opacity:.6;font-size:9px;letter-spacing:.06em}
+
+/* ---------- drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(11,20,40,.55);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:.25s;z-index:70}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;width:min(310px,84vw);z-index:80;
+  background:var(--ink);color:#fff;transform:translateX(102%);transition:transform .28s cubic-bezier(.2,.8,.2,1);
+  padding:calc(14px + env(safe-area-inset-top)) 0 20px;overflow-y:auto;
+}
+.drawer.on{transform:none}
+.drawer h3{font-size:20px;padding:0 20px 4px}
+.drawer .sub{padding:0 20px 14px;font-size:12px;opacity:.6}
+.drawer nav{display:flex;flex-direction:column}
+.drawer a{
+  display:flex;align-items:center;gap:12px;padding:13px 20px;color:#fff;text-decoration:none;
+  font-size:15px;border-right:3px solid transparent;
+}
+.drawer a .ic{font-size:19px;width:24px;text-align:center}
+.drawer a .badge{margin-inline-start:auto;background:var(--oranje);color:#fff;font-size:11px;
+  min-width:20px;height:20px;border-radius:10px;display:grid;place-content:center;padding:0 6px;font-weight:600}
+.drawer a.active{background:rgba(255,255,255,.08);border-right-color:var(--oranje)}
+.drawer .dsep{height:1px;background:rgba(255,255,255,.12);margin:12px 20px}
+
+/* ---------- boarding pass hero ---------- */
+.pass{
+  position:relative;margin:16px 0 18px;border-radius:20px;color:#fff;overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 88% -10%, #2F5AA8 0%, transparent 55%),
+    linear-gradient(160deg,#1B2F5C 0%,#16264A 60%,#101B36 100%);
+  box-shadow:0 14px 34px rgba(16,27,54,.35);
+}
+.pass .stripe{height:5px;display:flex}
+.pass .stripe i{flex:1}
+.pass .stripe i:nth-child(1){background:var(--flagred)}
+.pass .stripe i:nth-child(2){background:#F3F5FA}
+.pass .stripe i:nth-child(3){background:var(--delft)}
+.pass-top{padding:16px 18px 14px}
+.pass-eyebrow{font-size:10.5px;letter-spacing:.22em;opacity:.6;text-transform:uppercase}
+.route{display:flex;align-items:center;gap:12px;margin-top:6px}
+.route .code{font-family:var(--display);font-size:34px;line-height:1}
+.route .city{font-size:10.5px;opacity:.65;letter-spacing:.1em;margin-top:3px}
+.route .plane{flex:1;position:relative;height:22px}
+.route .plane::before{content:"";position:absolute;top:11px;right:0;left:0;border-top:2px dotted rgba(255,255,255,.35)}
+.route .plane span{position:absolute;top:0;left:50%;transform:translateX(-50%) scaleX(-1);font-size:19px}
+.perf{position:relative;height:18px}
+.perf::before,.perf::after{content:"";position:absolute;top:0;width:18px;height:18px;border-radius:50%;background:var(--porcelain)}
+.perf::before{right:-9px}
+.perf::after{left:-9px}
+.perf i{position:absolute;top:9px;right:14px;left:14px;border-top:2px dashed rgba(255,255,255,.28)}
+.pass-bot{padding:2px 18px 18px}
+.cdown{display:flex;gap:7px;justify-content:center;margin:2px 0 10px}
+.cdown div{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:8px 2px;flex:1;text-align:center}
+.cdown b{display:block;font-family:var(--display);font-size:27px;line-height:1;font-variant-numeric:tabular-nums}
+.cdown span{font-size:9.5px;opacity:.6;letter-spacing:.08em}
+.cd-line{text-align:center;font-size:13px;opacity:.8}
+.pass-meta{display:flex;gap:8px;margin-top:12px}
+.pass-meta div{flex:1;background:rgba(255,255,255,.07);border-radius:11px;padding:7px 9px}
+.pass-meta span{display:block;font-size:9.5px;opacity:.55;letter-spacing:.08em}
+.pass-meta b{font-size:13.5px;font-weight:500}
+
+/* ---------- cards ---------- */
+.card{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:14px;border:1px solid rgba(216,224,238,.7)}
+.card > h2{font-size:19px;margin-bottom:2px}
+.card .sub{color:var(--muted);font-size:12.5px}
+.sec-title{display:flex;align-items:baseline;gap:9px;margin:22px 2px 12px}
+.sec-title h2{font-size:23px}
+.sec-title .kicker{font-size:11px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+.eyebrow{font-size:10.5px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
+
+/* ---------- today ---------- */
+.today-head{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px;border:1px solid rgba(216,224,238,.7)}
+.today-head .band{background:linear-gradient(105deg,var(--delft),#2C57A5);color:#fff;padding:14px 16px}
+.today-head .band .d{font-family:var(--display);font-size:25px;line-height:1.15}
+.today-head .band .n{font-size:12px;opacity:.75;letter-spacing:.04em}
+.today-head .body{padding:14px 16px}
+.brief{font-size:15.5px;line-height:1.6}
+.wx{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.wx .big{font-size:26px}
+.now-up{margin-top:12px;border-radius:14px;padding:12px 14px;background:linear-gradient(180deg,#FFF4EC,#FFEDE0);border:1px solid #FBD3B6}
+.now-up .lbl{font-size:10.5px;letter-spacing:.16em;color:var(--oranje);font-weight:600}
+.now-up .t{font-family:var(--display);font-size:18px;margin-top:2px}
+.now-up .m{font-size:13px;color:#8A5A38}
+
+/* ---------- day tabs ---------- */
+.daytabs{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.daytabs::-webkit-scrollbar{display:none}
+.daytab{
+  flex:0 0 auto;border:1px solid var(--line);background:var(--paper);border-radius:14px;
+  padding:8px 13px;text-align:center;min-width:78px;transition:.15s;
+}
+.daytab b{display:block;font-family:var(--display);font-size:16px}
+.daytab span{font-size:10.5px;color:var(--muted)}
+.daytab.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.daytab.on span{color:rgba(255,255,255,.65)}
+.daytab.today{border-color:var(--oranje);border-width:2px}
+
+/* ---------- timeline ---------- */
+.tl{position:relative;padding-inline-start:0}
+.item{
+  position:relative;background:var(--paper);border:1px solid rgba(216,224,238,.9);border-radius:16px;
+  padding:13px 14px;margin-bottom:11px;box-shadow:0 1px 4px rgba(22,38,74,.05);transition:.18s;
+}
+.item.done{opacity:.62;background:#F7F9FC}
+.item.done .it-title{text-decoration:line-through;text-decoration-color:rgba(22,38,74,.35)}
+.item.live{border-color:var(--oranje);box-shadow:0 0 0 3px rgba(242,107,33,.14)}
+.it-top{display:flex;align-items:flex-start;gap:10px}
+.it-time{
+  flex:0 0 auto;font-variant-numeric:tabular-nums;font-size:12px;font-weight:600;color:var(--delft);
+  background:#EAF0FB;border-radius:8px;padding:4px 8px;white-space:nowrap;letter-spacing:.01em;
+}
+.it-title{font-family:var(--display);font-size:17px;line-height:1.3;flex:1;min-width:0}
+.tick{
+  flex:0 0 auto;width:28px;height:28px;border-radius:9px;border:2px solid var(--line);background:#fff;
+  display:grid;place-content:center;font-size:14px;color:transparent;padding:0;
+}
+.item.done .tick{background:var(--canal);border-color:var(--canal);color:#fff}
+.it-place{margin-top:9px;display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  display:inline-flex;align-items:center;gap:5px;font-size:12.5px;text-decoration:none;
+  border-radius:999px;padding:5px 11px;border:1px solid var(--line);color:var(--ink);background:#fff;
+}
+.chip.map{background:#EAF0FB;border-color:#CDDCF5;color:var(--delft)}
+.chip.book{background:#FFF1E7;border-color:#F8D2B4;color:#C1521A}
+.chip.ghost{color:var(--muted)}
+.it-note{margin-top:9px;font-size:13.5px;color:#4A5670;white-space:pre-wrap;background:#F7F9FC;border-radius:11px;padding:9px 11px;border:1px solid #EAEFF7}
+.it-note b{color:var(--flagred);font-weight:500}
+.it-actions{display:flex;gap:6px;margin-top:10px;justify-content:flex-end}
+.mini{border:1px solid var(--line);background:#fff;border-radius:9px;width:32px;height:30px;font-size:14px;color:var(--muted);padding:0;line-height:1}
+.mini:hover{border-color:var(--delft);color:var(--delft)}
+
+/* ---------- buttons ---------- */
+.btn{
+  border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:500;
+  background:var(--ink);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;
+}
+.btn.wide{display:flex;width:100%}
+.btn.o{background:var(--oranje)}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.red{background:var(--flagred)}
+.btn.sm{padding:9px 13px;font-size:13.5px;border-radius:11px}
+
+/* ---------- tasks ---------- */
+.task{display:flex;gap:11px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.task:last-child{border-bottom:0}
+.task .tick{width:26px;height:26px}
+.task.done{opacity:.55}
+.task.done .tt{text-decoration:line-through}
+.tt{font-size:15px;font-weight:500;line-height:1.35}
+.tmeta{font-size:12.5px;color:var(--muted);margin-top:3px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.due{font-size:11.5px;border-radius:7px;padding:2px 7px;background:#EEF2F8;color:var(--muted)}
+.due.soon{background:#FFF1E7;color:#C1521A}
+.due.late{background:#FBE9EA;color:var(--flagred)}
+.due.ok{background:#E8F5F0;color:var(--canal)}
+.grp{font-size:11px;letter-spacing:.14em;color:var(--muted);margin:16px 0 4px;text-transform:uppercase}
+
+/* ---------- stamps ---------- */
+.stamps{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:520px){.stamps{grid-template-columns:repeat(3,1fr)}}
+.stamp{
+  position:relative;border:2px dashed var(--line);border-radius:14px;padding:12px 10px;text-align:center;
+  background:#fff;transition:.2s;overflow:hidden;
+}
+.stamp .em{font-size:24px;display:block}
+.stamp .nm{font-size:13px;font-weight:500;margin-top:4px;line-height:1.25}
+.stamp .wh{font-size:11px;color:var(--muted);margin-top:2px}
+.stamp.on{border-color:var(--flagred);border-style:solid;background:#FFF7F7}
+.stamp.on::after{
+  content:"נטעם ✓";position:absolute;top:8px;left:-30px;transform:rotate(-18deg);
+  background:var(--flagred);color:#fff;font-size:10px;letter-spacing:.1em;padding:3px 34px;font-weight:600;
+  animation:stampIn .25s cubic-bezier(.2,1.4,.4,1);
+}
+@keyframes stampIn{from{transform:rotate(-18deg) scale(2.2);opacity:0}to{transform:rotate(-18deg) scale(1);opacity:1}}
+
+/* ---------- flights ---------- */
+.fl{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#fff;margin-bottom:14px}
+.fl .fh{background:var(--ink);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:9px}
+.fl .fh b{font-family:var(--display);font-size:17px}
+.fl .fh .no{margin-inline-start:auto;font-size:12px;opacity:.7;letter-spacing:.05em}
+.fl .fb{padding:14px}
+.legs{display:flex;align-items:center;gap:10px}
+.leg{flex:1}
+.leg .ap{font-family:var(--display);font-size:22px}
+.leg .tm{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.leg .dt{font-size:11.5px;color:var(--muted)}
+.leg.l2{text-align:left}
+.arrow{color:var(--muted);font-size:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}
+.kv{background:#F7F9FC;border:1px solid #EAEFF7;border-radius:11px;padding:8px 10px}
+.kv span{display:block;font-size:10.5px;color:var(--muted);letter-spacing:.06em}
+.kv b{font-size:13.5px;font-weight:500}
+.statusbox{margin-top:13px;border-radius:12px;padding:11px 12px;border:1px solid var(--line);background:#F7F9FC}
+.statusbox.ok{background:#E8F5F0;border-color:#BFE3D6}
+.statusbox.warn{background:#FFF4E8;border-color:#F8D2B4}
+.statusbox.bad{background:#FBE9EA;border-color:#F0C6C9}
+.linkrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+
+/* ---------- forms ---------- */
+label.f{display:block;margin-bottom:11px}
+label.f span{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+input.i,textarea.i,select.i{
+  width:100%;border:1px solid var(--line);border-radius:11px;padding:11px 12px;background:#fff;color:var(--ink);
+}
+textarea.i{min-height:78px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+
+/* ---------- modal sheet ---------- */
+.sheet{
+  position:fixed;inset:0;z-index:90;display:none;align-items:flex-end;justify-content:center;
+}
+.sheet.on{display:flex}
+.sheet .bg{position:absolute;inset:0;background:rgba(11,20,40,.5)}
+.sheet .panel{
+  position:relative;background:var(--porcelain);width:100%;max-width:600px;border-radius:22px 22px 0 0;
+  max-height:92vh;overflow-y:auto;padding:8px 16px calc(20px + env(safe-area-inset-bottom));
+  animation:up .26s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes up{from{transform:translateY(30px);opacity:.5}to{transform:none;opacity:1}}
+.grab{width:40px;height:4px;background:var(--line);border-radius:3px;margin:6px auto 12px}
+.sheet h3{font-size:20px;margin-bottom:12px}
+
+/* ---------- misc ---------- */
+.toast{
+  position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--ink);color:#fff;padding:11px 18px;border-radius:13px;font-size:14px;z-index:120;
+  opacity:0;transition:.28s;box-shadow:0 8px 24px rgba(0,0,0,.25);pointer-events:none;max-width:90vw;text-align:center;
+}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.sync{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--muted);flex:0 0 7px}
+.dot.live{background:var(--canal);box-shadow:0 0 0 3px rgba(18,113,90,.15)}
+.dot.local{background:var(--oranje)}
+.alertbar{
+  background:var(--flagred);color:#fff;border-radius:14px;padding:11px 14px;margin-bottom:14px;font-size:14px;
+  display:flex;gap:9px;align-items:flex-start;
+}
+.empty{text-align:center;color:var(--muted);padding:26px 12px;font-size:14px}
+.money{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px;align-items:center}
+.money:last-child{border-bottom:0}
+.money .amt{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.tot{background:var(--ink);color:#fff;border-radius:14px;padding:13px 15px;display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.tot b{font-family:var(--display);font-size:23px}
+.info-q{border-bottom:1px solid var(--line);padding:12px 0}
+.info-q:last-child{border-bottom:0}
+.info-q h4{font-size:15px;margin-bottom:3px}
+.info-q p{margin:0;font-size:13.5px;color:#4A5670}
+.footer{text-align:center;color:var(--muted);font-size:12px;padding:26px 0 10px}
+section{display:none;animation:fade .2s}
+section.on{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <button class="burger" id="burger" aria-label="תפריט" aria-expanded="false"><span></span><span></span><span></span></button>
+  <div class="brand">בר ודור באמסטרדם<small>31.8 – 4.9.2026 · הזמנה 13292424</small></div>
+  <div class="clocks">
+    <div><span>ת״א</span><b id="clkIL">--:--</b></div>
+    <div><span>אמסטרדם</span><b id="clkNL">--:--</b></div>
+  </div>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer">
+  <h3>לאן נוסעים?</h3>
+  <div class="sub" id="drawerSub">‎</div>
+  <nav id="nav">
+    <a href="#today" data-sec="today"><i class="ic">🌤️</i>היום</a>
+    <a href="#plan" data-sec="plan"><i class="ic">🗓️</i>הלוז המלא</a>
+    <a href="#flights" data-sec="flights"><i class="ic">✈️</i>טיסות וצ׳ק־אין</a>
+    <a href="#tasks" data-sec="tasks"><i class="ic">✅</i>משימות והזמנות<b class="badge" id="badgeTasks">0</b></a>
+    <div class="dsep"></div>
+    <a href="#taste" data-sec="taste"><i class="ic">🍟</i>חובה לטעום</a>
+    <a href="#pack" data-sec="pack"><i class="ic">🧳</i>רשימת אריזה</a>
+    <a href="#money" data-sec="money"><i class="ic">💶</i>תקציב והוצאות</a>
+    <a href="#info" data-sec="info"><i class="ic">📖</i>מידע שימושי</a>
+    <div class="dsep"></div>
+    <a href="#settings" data-sec="settings"><i class="ic">⚙️</i>סנכרון וגיבוי</a>
+  </nav>
+</aside>
+
+<main class="wrap">
+
+<!-- ========== TODAY ========== -->
+<section id="sec-today" class="on">
+  <div class="pass" id="pass"></div>
+  <div id="alerts"></div>
+  <div class="today-head" id="todayHead"></div>
+  <div id="todayList"></div>
+  <div class="card" id="todayTasks"></div>
+</section>
+
+<!-- ========== PLAN ========== -->
+<section id="sec-plan">
+  <div class="sec-title"><div><div class="kicker">Itinerary</div><h2>הלוז המלא</h2></div></div>
+  <div class="daytabs" id="dayTabs"></div>
+  <div id="dayHead"></div>
+  <div class="tl" id="dayItems"></div>
+  <button class="btn ghost wide" id="addItem">＋ הוספת פעילות ליום הזה</button>
+  <div class="footer">אפשר לערוך, למחוק ולהזיז כל פעילות. השינויים נשמרים אוטומטית.</div>
+</section>
+
+<!-- ========== FLIGHTS ========== -->
+<section id="sec-flights">
+  <div class="sec-title"><div><div class="kicker">Arkia · IZ</div><h2>טיסות וצ׳ק־אין</h2></div></div>
+  <div id="flightCards"></div>
+  <div class="card">
+    <h2>נוסעים</h2>
+    <div class="sub" style="margin-bottom:10px">כפי שמופיע בכרטיס — לוודא שתואם לדרכון</div>
+    <div class="money"><span>Mr. Dor Bitton</span><span class="amt">מזוודה 20 ק״ג + תיק יד</span></div>
+    <div class="money"><span>Ms. Bar Bitton Koren</span><span class="amt">תיק יד בלבד</span></div>
+    <div class="it-note" style="margin-top:12px">תיק יד בארקיע: עד 55×40×20 ס״מ ועד 7 ק״ג. לבר יש רק תיק יד — כל הנוזלים חייבים להיות במיכלים של עד 100 מ״ל בשקית שקופה, וסכינים/מספריים אסורים. מטען נייד תמיד בתיק היד, אף פעם לא בבטן המטוס.</div>
+  </div>
+</section>
+
+<!-- ========== TASKS ========== -->
+<section id="sec-tasks">
+  <div class="sec-title"><div><div class="kicker">To do</div><h2>משימות והזמנות</h2></div></div>
+  <div class="card" id="taskList"></div>
+  <button class="btn ghost wide" id="addTask">＋ הוספת משימה</button>
+</section>
+
+<!-- ========== TASTE ========== -->
+<section id="sec-taste">
+  <div class="sec-title"><div><div class="kicker">Eat the city</div><h2>חובה לטעום</h2></div></div>
+  <div class="card">
+    <div class="sub" style="margin-bottom:12px">כל טעימה מקבלת חותמת. <b id="tasteScore"></b></div>
+    <div class="stamps" id="stampGrid"></div>
+  </div>
+</section>
+
+<!-- ========== PACK ========== -->
+<section id="sec-pack">
+  <div class="sec-title"><div><div class="kicker">Packing</div><h2>רשימת אריזה</h2></div></div>
+  <div id="packList"></div>
+  <button class="btn ghost wide" id="addPack">＋ הוספת פריט</button>
+</section>
+
+<!-- ========== MONEY ========== -->
+<section id="sec-money">
+  <div class="sec-title"><div><div class="kicker">Budget</div><h2>תקציב והוצאות</h2></div></div>
+  <div class="card" id="moneyBox"></div>
+</section>
+
+<!-- ========== INFO ========== -->
+<section id="sec-info">
+  <div class="sec-title"><div><div class="kicker">Good to know</div><h2>מידע שימושי</h2></div></div>
+  <div class="card">
+    <h2>המלון</h2>
+    <div class="sub">The Diamond Amsterdam · אזור ליידספליין</div>
+    <div class="linkrow">
+      <a class="chip map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=The+Diamond+Amsterdam">🗺️ ניווט למלון</a>
+      <a class="chip" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Schiphol+Airport&destination=The+Diamond+Amsterdam&travelmode=transit">🚆 משדה התעופה למלון</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>תחבורה</h2>
+    <div class="info-q"><h4>משדה התעופה לעיר</h4><p>רכבת ישירה מסכיפול לתחנת אמסטרדם סנטרל, כ־15–20 דקות. כרטיס קונים במכונה או באפליקציית NS. אפשר גם לשלם ישירות בכרטיס אשראי contactless בשערים.</p></div>
+    <div class="info-q"><h4>בתוך העיר</h4><p>חשמליות ואוטובוסים של GVB. הדרך הכי פשוטה: להעביר כרטיס אשראי contactless בכניסה וביציאה (OVpay). חובה להעביר גם ביציאה, אחרת מחייבים תעריף מלא.</p></div>
+    <div class="info-q"><h4>לאפטלינג</h4><p>רכבת מאמסטרדם סנטרל ל־’s-Hertogenbosch ומשם אוטובוס 300 לכיוון Tilburg. בערך שעה וחצי בסך הכל. שווה לקנות כרטיסי רכבת מראש באפליקציית NS.</p></div>
+    <div class="info-q"><h4>אופניים</h4><p>אמסטרדם היא עיר של רוכבים, לא של הולכי רגל. לא לעמוד על שביל האופניים האדום — זה הכביש שלהם.</p></div>
+  </div>
+  <div class="card">
+    <h2>כסף וחשמל</h2>
+    <div class="info-q"><h4>תשלומים</h4><p>הולנד היא מדינה של כרטיסים. הרבה מקומות לא מקבלים מזומן בכלל, וחלק לא מקבלים Mastercard/Visa קרדיט אלא רק דביט/Maestro. שווה להגיע עם שני כרטיסים שונים ועם קצת מזומן לדוכנים בשוק.</p></div>
+    <div class="info-q"><h4>חשמל</h4><p>230V, שקע מסוג C/F. מטענים ישראליים עם תקע עגול דק נכנסים ישירות; לתקע ישראלי משולש צריך מתאם.</p></div>
+    <div class="info-q"><h4>טיפים</h4><p>לא חובה. השירות כלול במחיר. מעגלים למעלה או משאירים 5–10% במסעדה טובה.</p></div>
+  </div>
+  <div class="card">
+    <h2>חירום</h2>
+    <div class="info-q"><h4>112</h4><p>מספר חירום אחיד באירופה — משטרה, אמבולנס, כיבוי אש. עובד גם בלי סים מקומי.</p></div>
+    <div class="info-q"><h4>ארקיע</h4><p>מוקד: 03-6903712. את מספר ההזמנה 13292424 כדאי לדעת בעל פה.</p></div>
+    <div class="linkrow">
+      <a class="chip" target="_blank" rel="noopener" href="https://www.google.com/search?q=%D7%A9%D7%92%D7%A8%D7%99%D7%A8%D7%95%D7%AA+%D7%99%D7%A9%D7%A8%D7%90%D7%9C+%D7%91%D7%94%D7%95%D7%9C%D7%A0%D7%93+%D7%98%D7%9C%D7%A4%D7%95%D7%9F">🇮🇱 שגרירות ישראל בהולנד</a>
+      <a class="chip" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=pharmacy+near+Leidseplein+Amsterdam">💊 בתי מרקחת קרובים</a>
+    </div>
+  </div>
+  <div class="card">
+    <h2>פתקים שלנו</h2>
+    <div class="sub" style="margin-bottom:8px">מקום לכל מה שנזכרים בו ברגע האחרון</div>
+    <textarea class="i" id="notesBox" placeholder="מסעדה שמישהו המליץ, מתנות לקנות, מידות של בגדים…"></textarea>
+  </div>
+</section>
+
+<!-- ========== SETTINGS ========== -->
+<section id="sec-settings">
+  <div class="sec-title"><div><div class="kicker">Sync</div><h2>סנכרון וגיבוי</h2></div></div>
+  <div class="card" id="syncBox"></div>
+  <div class="card">
+    <h2>גיבוי</h2>
+    <div class="sub" style="margin-bottom:12px">קובץ אחד עם כל הלוז, המשימות והסימונים.</div>
+    <div class="linkrow">
+      <button class="btn ghost sm" id="expBtn">⬇️ ייצוא גיבוי</button>
+      <button class="btn ghost sm" id="impBtn">⬆️ שחזור מגיבוי</button>
+      <button class="btn red sm" id="resetBtn">↺ איפוס ללוז המקורי</button>
+    </div>
+    <input type="file" id="impFile" accept="application/json" style="display:none">
+  </div>
+</section>
+
+<div class="footer">נבנה באהבה לבר ולדור · טיסה נעימה 🧡</div>
+</main>
+
+<div class="sheet" id="sheet"><div class="bg" data-close="1"></div><div class="panel" id="sheetPanel"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =====================================================================
+   בר ודור באמסטרדם · 31.8–4.9.2026
+   ---------------------------------------------------------------------
+   סנכרון ענן (אופציונלי): הדביקו כאן את פרטי הפרויקט מ-Firebase.
+   כל עוד projectId ריק — האתר עובד מצוין ושומר מקומית על המכשיר.
+   ===================================================================== */
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDFIvIPUPPA-CMwc8PP6EzQCQqfzg-QdSQ",
+  authDomain: "amsterdam2026.firebaseapp.com",
+  projectId: "amsterdam2026",
+  storageBucket: "amsterdam2026.firebasestorage.app",
+  messagingSenderId: "575275301473",
+  appId: "1:575275301473:web:f0eb090ee92257ba7d8820",
+  measurementId: "G-Q4WC291DFC"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const CLOUD_PATH = { col: "trips", doc: "amsterdam2026" };
+
+/* ---------- קבועים של הטיול ---------- */
+const TRIP = {
+  outbound: { no:"IZ 513", pnr:"13292424", from:"TLV", fromName:"תל אביב · נתב״ג",
+    to:"AMS", toName:"אמסטרדם · סכיפול", depISO:"2026-08-31T14:30:00+03:00",
+    arrISO:"2026-08-31T18:40:00+02:00", terminal:"טרמינל 1", meet:"31.8 בשעה 11:30",
+    op:"מופעלת ע״י Electra Airways עבור ארקיע" },
+  inbound: { no:"IZ 514", pnr:"13292424", from:"AMS", fromName:"אמסטרדם · סכיפול",
+    to:"TLV", toName:"תל אביב · נתב״ג", depISO:"2026-09-04T19:00:00+02:00",
+    arrISO:"2026-09-05T00:30:00+03:00", terminal:"נחיתה בטרמינל 3", meet:"4.9 בשעה 16:00",
+    op:"מופעלת ע״י Electra Airways עבור ארקיע" }
+};
+const AMS = { lat:52.3676, lon:4.9041, tz:"Europe/Amsterdam" };
+const IL_TZ = "Asia/Jerusalem";
+
+/* ---------- הלוז המקורי ---------- */
+const M = q => "https://www.google.com/maps/search/?api=1&query=" + q;
+const DEFAULTS = {
+  v: 3,
+  days: [
+    { id:"d1", date:"2026-08-31", label:"יום שני",
+      brief:"נוחתים ב-18:40, מפילים מזוודות במלון ויוצאים לסיבוב ערב ראשון בליידספליין. בלי יעדים גדולים — רק בירה, ביטרבולן ותעלות.",
+      items:[
+        { id:"i101", time:"19:00 – 20:00", title:"נחיתה, הגעה למלון וצ׳ק־אין", place:"The Diamond Amsterdam",
+          map:M("The+Diamond+Amsterdam"), note:"אזור ליידספליין התוסס.", book:"", bookUrl:"" },
+        { id:"i102", time:"20:00 – 22:00", title:"סיבוב היכרות בליידספליין ובתעלות", place:"Leidseplein",
+          map:M("Leidseplein+Amsterdam"),
+          note:"אוכל: להזמין ביטרבולן (Bitterballen) עם הבירה.\nפאבים לערב: The Waterhole (הופעות חיות) או Café Alto (ג׳אז).", book:"", bookUrl:"" }
+      ]},
+    { id:"d2", date:"2026-09-01", label:"יום שלישי",
+      brief:"היום העירוני הקלאסי: רמברנדט בבוקר, עוגייה אגדית, שופינג בקלוורסטראט, רופטופ לפני ערב ברובע האדום.",
+      items:[
+        { id:"i201", time:"09:30 – 11:00", title:"מוזיאון בית רמברנדט", place:"Rembrandt House",
+          map:M("Rembrandt+House+Museum"), note:"היכרות עם הבית שבו חי ופעל הצייר.",
+          book:"הזמנת כרטיסים", bookUrl:"https://www.rembrandthuis.nl/en/visit/tickets/" },
+        { id:"i202", time:"11:15 – 12:00", title:"עוגיות Van Stapele 🍪", place:"Van Stapele Koekmakerij",
+          map:M("Van+Stapele+Amsterdam"), note:"חובה לטעום 1: שווה את התור. קקאו שחור עם פרלין לבן נוזלי בפנים.", book:"", bookUrl:"" },
+        { id:"i203", time:"12:00 – 16:00", title:"שופינג רצחני במרכז העיר", place:"Kalverstraat",
+          map:M("Kalverstraat+Amsterdam"),
+          note:"חובה לטעום 2: צ׳יפס ב-Vleminckx.\nחובה לטעום 3: סטרופוואפל ב-Van Wonderen.\nאפשרות לעיסוי רגליים ספונטני באזור.", book:"", bookUrl:"" },
+        { id:"i204", time:"16:00 – 18:00", title:"רופטופ למבוגרים — W Lounge", place:"W Lounge Amsterdam",
+          map:M("W+Lounge+Amsterdam"), note:"קוקטיילים, תצפית פנורמית ואווירת לאונג׳ אחרי הקניות.",
+          book:"הזמנת שולחן (מומלץ)", bookUrl:"https://www.marriott.com/en-us/hotels/amswh-w-amsterdam/dining/" },
+        { id:"i205", time:"18:00 – 20:00", title:"התרעננות וארוחת ערב", place:"אזור המלון / מרכז",
+          map:"", note:"זמן חופשי לארוחה טובה.", book:"", bookUrl:"" },
+        { id:"i206", time:"20:00 – 22:00", title:"רובע החלונות האדומים", place:"De Wallen",
+          map:M("De+Wallen+Amsterdam"), note:"ברים לאזור: Mata Hari (אווירה בוגרת) או Café de Jaren.", book:"", bookUrl:"" }
+      ]},
+    { id:"d3", date:"2026-09-02", label:"יום רביעי",
+      brief:"יום שלם באפטלינג. יוצאים ב-8 מהתחנה המרכזית, חוזרים מותשים ומאושרים. קפה בדרך זו לא המלצה אלא הוראה.",
+      items:[
+        { id:"i301", time:"08:00 – 10:00", title:"נסיעה לפארק השעשועים", place:"Amsterdam Centraal",
+          map:M("Amsterdam+Centraal"), note:"רכבת ואז אוטובוס לפארק. לקנות קפה בדרך.",
+          book:"כרטיס רכבת (אפשר גם מראש ב-NS)", bookUrl:"https://www.ns.nl/en" },
+        { id:"i302", time:"10:00 – 18:00", title:"פארק השעשועים Efteling 🎢", place:"Efteling Park",
+          map:M("Efteling"), note:"יום קסום של רכבות הרים ויער אגדות. ארוחת צהריים בפארק.",
+          book:"חובה להזמין כרטיסים מראש", bookUrl:"https://www.efteling.com/en/park/tickets" },
+        { id:"i303", time:"18:00 – 20:00", title:"חזרה לאמסטרדם", place:"The Diamond Amsterdam",
+          map:M("The+Diamond+Amsterdam"), note:"חזרה דרך התחנה המרכזית.", book:"", bookUrl:"" },
+        { id:"i304", time:"20:00 ואילך", title:"ארוחת ערב שכונתית ושינה", place:"Café de Koe",
+          map:M("Cafe+de+Koe+Amsterdam"), note:"ערב רגוע בבר הולנדי קרוב למלון כדי להתאושש מהפארק.", book:"", bookUrl:"" }
+      ]},
+    { id:"d4", date:"2026-09-03", label:"יום חמישי",
+      brief:"ואן גוך בבוקר, שוק אלברט קאופ בצהריים, אופניים בוונדלפארק אחר הצהריים ושיט יין וגבינות בערב. היום הכי רומנטי בטיול.",
+      items:[
+        { id:"i401", time:"09:00 – 09:45", title:"ארוחת בוקר קלה", place:"Bakers & Roasters",
+          map:M("Bakers+and+Roasters+Amsterdam"), note:"קפה משובח ומנות בראנץ׳ בדרום העיר.", book:"", bookUrl:"" },
+        { id:"i402", time:"10:00 – 12:00", title:"מוזיאון ואן גוך 🎨", place:"Van Gogh Museum",
+          map:M("Van+Gogh+Museum+Amsterdam"), note:"אוסף האמנות המפורסם בעולם. הכניסה היא לפי שעה מדויקת שנבחרת בהזמנה.",
+          book:"חובה להזמין מראש לשעה 10:00", bookUrl:"https://www.vangoghmuseum.nl/en" },
+        { id:"i403", time:"12:15 – 14:00", title:"שוק אלברט קאופ", place:"Albert Cuyp Market",
+          map:M("Albert+Cuyp+Market+Amsterdam"),
+          note:"חובה לטעום 4: פופרטייס (מיני פנקייקים).\nחובה לטעום 5: דוכן Rudi׳s Original לוואפל חם על המקום.", book:"", bookUrl:"" },
+        { id:"i404", time:"14:30 – 17:00", title:"טיול אופניים זוגי 🚲", place:"MacBike / Vondelpark",
+          map:M("Vondelpark+Amsterdam"), note:"השכרת אופניים באזור ליידספליין ורכיבה בפארק ולאורך התעלות.",
+          book:"השכרה במקום", bookUrl:"" },
+        { id:"i405", time:"17:00 – 19:00", title:"זמן חופשי והתארגנות", place:"The Diamond Amsterdam",
+          map:M("The+Diamond+Amsterdam"), note:"זמן להתלבש לערב.", book:"", bookUrl:"" },
+        { id:"i406", time:"19:30 – 21:00", title:"שיט תעלות · יין וגבינות 🍷", place:"Flagship Amsterdam",
+          map:M("Flagship+Amsterdam"), note:"שתייה חופשית וגבינות מול נוף התעלות.\nאופציה לבר אחרי: Shiraz Jardin des Vins.",
+          book:"להזמין Cheese & Wine מראש", bookUrl:"https://flagshipamsterdam.com/" }
+      ]},
+    { id:"d5", date:"2026-09-04", label:"יום שישי",
+      brief:"בוקר אחרון ביורדאן, גבינות הביתה, פודהאלן לצהריים ואז סכיפול. יוצאים מהמלון לא יאוחר מ-16:00.",
+      items:[
+        { id:"i501", time:"09:30 – 11:00", title:"בוקר ביורדאן ובתשעת הרחובות", place:"Jordaan / 9 Straatjes",
+          map:M("Jordaan+Amsterdam"),
+          note:"חובה לטעום 6: פאי תפוחים ב-Winkel 43.\nאקסטרה: עוגיות Het Koekemannetje בתשעת הרחובות.", book:"", bookUrl:"" },
+        { id:"i502", time:"11:00 – 11:30", title:"קניית גבינות הביתה 🧀", place:"De Kaaskamer",
+          map:M("De+Kaaskamer+van+Amsterdam"), note:"חשוב: לבקש אריזת ואקום כדי שהגבינות ישרדו את הטיסה. הגבינות נוסעות במזוודה של דור, לא בתיק היד.", book:"", bookUrl:"" },
+        { id:"i503", time:"12:00 – 14:00", title:"ארוחת צהריים ב-Foodhallen", place:"Foodhallen",
+          map:M("Foodhallen+Amsterdam"), note:"מתחם אוכל מקורה ותוסס: טאקוס, המבורגרים, סושי ועוד.", book:"", bookUrl:"" },
+        { id:"i504", time:"14:00 – 15:30", title:"קפה אחרון והשלמות", place:"Oud-West / המלון",
+          map:M("Oud+West+Amsterdam"), note:"הליכה נינוחה חזרה למלון ואיסוף המזוודות.", book:"", bookUrl:"" },
+        { id:"i505", time:"16:00 – 19:00", title:"נסיעה לשדה התעופה וטיסה הביתה ✈️", place:"Schiphol Airport",
+          map:M("Schiphol+Airport"), note:"התייצבות בשדה ב-16:00. רכבת מסנטרל לסכיפול כ-20 דקות — לצאת עם מרווח.", book:"", bookUrl:"" }
+      ]}
+  ],
+  itemDone: {},
+  tasks: [
+    { id:"t01", title:"להזמין כרטיסים לאפטלינג", note:"כרטיסים ליום מסוים ונגמרים. זו ההזמנה הכי דחופה ברשימה.", url:"https://www.efteling.com/en/park/tickets", due:"2026-08-20", grp:"הזמנות" },
+    { id:"t02", title:"להזמין כרטיסים למוזיאון ואן גוך לשעה 10:00", note:"הכניסה היא בחלון זמן קבוע. בלי הזמנה מראש פשוט לא נכנסים.", url:"https://www.vangoghmuseum.nl/en", due:"2026-08-22", grp:"הזמנות" },
+    { id:"t03", title:"להזמין שיט יין וגבינות", note:"Flagship Amsterdam, יום חמישי 19:30.", url:"https://flagshipamsterdam.com/", due:"2026-08-24", grp:"הזמנות" },
+    { id:"t04", title:"להזמין כרטיסים לבית רמברנדט", note:"יום שלישי בבוקר.", url:"https://www.rembrandthuis.nl/en/visit/tickets/", due:"2026-08-26", grp:"הזמנות" },
+    { id:"t05", title:"להזמין שולחן ב-W Lounge", note:"מומלץ במיוחד לשעת השקיעה.", url:"", due:"2026-08-26", grp:"הזמנות" },
+    { id:"t06", title:"כרטיסי רכבת לאפטלינג", note:"אפשר מראש באפליקציית NS או במכונה בתחנה בבוקר עצמו.", url:"https://www.ns.nl/en", due:"2026-08-30", grp:"הזמנות" },
+    { id:"t07", title:"לבדוק תוקף דרכונים", note:"הדרכון צריך להיות בתוקף לפחות 3 חודשים אחרי היציאה מהולנד. לבדוק גם את של בר.", url:"", due:"2026-08-18", grp:"לפני היציאה" },
+    { id:"t08", title:"ביטוח נסיעות לשניים", note:"", url:"", due:"2026-08-25", grp:"לפני היציאה" },
+    { id:"t09", title:"eSIM או חבילת גלישה", note:"בלי אינטרנט אין ניווט, ובאמסטרדם זה קריטי.", url:"", due:"2026-08-28", grp:"לפני היציאה" },
+    { id:"t10", title:"יורו + שני כרטיסי אשראי", note:"הרבה מקומות בהולנד לא מקבלים מזומן, וחלק לא מקבלים Visa/Mastercard קרדיט. שווה להביא גם דביט.", url:"", due:"2026-08-29", grp:"לפני היציאה" },
+    { id:"t11", title:"לצלם דרכונים וכרטיסים לענן", note:"תמונה בגוגל דרייב שווה זהב אם משהו הולך לאיבוד.", url:"", due:"2026-08-29", grp:"לפני היציאה" },
+    { id:"t12", title:"להזמין הסעה לנתב״ג", note:"התייצבות ב-11:30, כלומר יציאה מהבית בסביבות 9:30–10:00.", url:"", due:"2026-08-29", grp:"לפני היציאה" },
+    { id:"t13", title:"צ׳ק־אין אונליין לטיסה הלוך (IZ 513)", note:"נפתח 24 שעות לפני ההמראה ונסגר 6 שעות לפניה — כלומר בין 30.8 בשעה 14:30 ל-31.8 בשעה 08:30.", url:"https://ssr.arkia.co.il/he/content/checkin", due:"2026-08-30", grp:"צ׳ק־אין" },
+    { id:"t14", title:"צ׳ק־אין אונליין לטיסה חזור (IZ 514)", note:"נפתח 3.9 בשעה 19:00 (שעון הולנד) ונסגר 4.9 ב-13:00. אמסטרדם היא אחד היעדים שבהם ארקיע מאפשרת צ׳ק־אין אונליין גם בחזור.", url:"https://ssr.arkia.co.il/he/content/checkin", due:"2026-09-03", grp:"צ׳ק־אין" },
+    { id:"t15", title:"לבקש אריזת ואקום לגבינות", note:"ב-De Kaaskamer ביום שישי בבוקר, לפני הנסיעה לשדה.", url:"", due:"2026-09-04", grp:"בטיול" }
+  ],
+  taskDone: {},
+  tastes: [
+    { id:"s1", em:"🍢", nm:"ביטרבולן", wh:"עם בירה בליידספליין" },
+    { id:"s2", em:"🍪", nm:"עוגיית Van Stapele", wh:"שווה את התור" },
+    { id:"s3", em:"🍟", nm:"צ׳יפס ב-Vleminckx", wh:"עם רוטב, בלי להתבייש" },
+    { id:"s4", em:"🧇", nm:"סטרופוואפל", wh:"Van Wonderen" },
+    { id:"s5", em:"🥞", nm:"פופרטייס", wh:"שוק אלברט קאופ" },
+    { id:"s6", em:"🧇", nm:"וופל חם", wh:"דוכן Rudi׳s Original" },
+    { id:"s7", em:"🥧", nm:"פאי תפוחים", wh:"Winkel 43" },
+    { id:"s8", em:"🧀", nm:"גבינה מ-De Kaaskamer", wh:"גם לטעום וגם לקנות" },
+    { id:"s9", em:"🍺", nm:"בירה הולנדית בבר חום", wh:"Café de Koe" }
+  ],
+  tasteDone: {},
+  pack: {
+    "דור · מזוודה 20 ק״ג": ["בגדים ל-5 ימים","ז׳קט קל / מעיל גשם","נעלי הליכה נוחות","מטען נייד ראשי","מתאם חשמל","תרופות אישיות","מקום פנוי לגבינות ולקניות"],
+    "בר · תיק יד בלבד": ["נוזלים עד 100 מ״ל בשקית שקופה","איפור ומוצרי טיפוח קטנים","ז׳קט לובשים על הגוף כדי לחסוך מקום","מטען נייד (חובה בתיק יד)","בלי מספריים או פינצטה חדה"],
+    "משותף": ["דרכונים","כרטיסי אשראי + מזומן ביורו","מטענים וכבלים","מטרייה קטנה","משקפי שמש","שקית לכביסה מלוכלכת"]
+  },
+  packDone: {},
+  expenses: [],
+  rate: 4.05,
+  status: { IZ513:{ state:"ok", note:"", by:"", at:0 }, IZ514:{ state:"ok", note:"", by:"", at:0 } },
+  notes: "",
+  updatedAt: 0
+};
+
+/* =========================== אחסון וסנכרון =========================== */
+const KEY = "ams2026";
+const CLIENT = (function(){
+  let c; try{ c = localStorage.getItem(KEY+"_client"); }catch(e){}
+  if(!c){ c = Math.random().toString(36).slice(2,9); try{ localStorage.setItem(KEY+"_client",c); }catch(e){} }
+  return c;
+})();
+let MEM = null;
+const local = {
+  read(){ try{ const r = localStorage.getItem(KEY); return r?JSON.parse(r):MEM; }catch(e){ return MEM; } },
+  write(o){ MEM = o; try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){} }
+};
+function clone(o){ return JSON.parse(JSON.stringify(o)); }
+function merge(base, saved){
+  if(!saved || typeof saved!=="object") return clone(base);
+  const out = clone(base);
+  for(const k in saved){ if(k in out || k==="updatedAt") out[k] = saved[k]; }
+  if(saved.v !== base.v){ out.days = saved.days && saved.days.length ? saved.days : clone(base.days); }
+  return out;
+}
+let S = merge(DEFAULTS, local.read());
+let cloud = { on:false, ready:false, save:null };
+let dirty = null;
+
+function save(silent){
+  S.updatedAt = Date.now();
+  local.write(S);
+  if(cloud.save){ clearTimeout(dirty); dirty = setTimeout(()=>cloud.save(S), 400); }
+  if(!silent) renderAll();
+}
+
+async function initCloud(){
+  if(!firebaseConfig.projectId){ paintSync(); return; }
+  try{
+    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+    const { getFirestore, doc, onSnapshot, setDoc } =
+      await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+    const db = getFirestore(initializeApp(firebaseConfig));
+    const ref = doc(db, CLOUD_PATH.col, CLOUD_PATH.doc);
+    cloud.on = true;
+    cloud.save = (state)=> setDoc(ref, { payload: JSON.stringify(state), by: CLIENT, at: Date.now() })
+                            .catch(()=> toast("השמירה לענן נכשלה. הנתונים נשמרו על המכשיר."));
+    onSnapshot(ref, snap=>{
+      cloud.ready = true;
+      const d = snap.data();
+      if(!d || d.by === CLIENT){ paintSync(); return; }
+      try{
+        const inc = JSON.parse(d.payload);
+        if((inc.updatedAt||0) > (S.updatedAt||0)){ S = merge(DEFAULTS, inc); local.write(S); renderAll(); toast("הגיע עדכון מהמכשיר השני"); }
+      }catch(e){}
+      paintSync();
+    }, ()=>{ cloud.ready=false; paintSync(); });
+    if(!(S.updatedAt>0)) setTimeout(()=>cloud.save(S), 1200);
+  }catch(e){ cloud.on=false; }
+  paintSync();
+}
+
+/* =========================== עזרים =========================== */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.prototype.slice.call(document.querySelectorAll(s));
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("on"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("on"),2400); }
+function pad(n){ return String(n).padStart(2,"0"); }
+function tzParts(tz, d){
+  const f = new Intl.DateTimeFormat("en-CA",{timeZone:tz,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false});
+  const p = {}; f.formatToParts(d||new Date()).forEach(x=>p[x.type]=x.value);
+  return { date:`${p.year}-${p.month}-${p.day}`, time:`${p.hour==="24"?"00":p.hour}:${p.minute}` };
+}
+const HE_DAYS = ["ראשון","שני","שלישי","רביעי","חמישי","שישי","שבת"];
+const HE_MON = ["ינואר","פברואר","מרץ","אפריל","מאי","יוני","יולי","אוגוסט","ספטמבר","אוקטובר","נובמבר","דצמבר"];
+function prettyDate(iso){
+  const [y,m,d] = iso.split("-").map(Number);
+  const dt = new Date(Date.UTC(y,m-1,d));
+  return `יום ${HE_DAYS[dt.getUTCDay()]}, ${d} ב${HE_MON[m-1]}`;
+}
+function shortDate(iso){ const [ ,m,d] = iso.split("-").map(Number); return `${d}.${m}`; }
+function dayIndexOf(iso){ return S.days.findIndex(d=>d.date===iso); }
+function startMinutes(t){
+  const m = String(t||"").match(/(\d{1,2}):(\d{2})/);
+  return m ? (+m[1])*60 + (+m[2]) : 24*60+1;
+}
+function localDate(){ return tzParts(inTrip() ? AMS.tz : IL_TZ).date; }
+function localTime(){ return tzParts(inTrip() ? AMS.tz : IL_TZ).time; }
+function inTrip(){
+  const t = tzParts(AMS.tz).date;
+  return t >= S.days[0].date && t <= S.days[S.days.length-1].date;
+}
+function uid(){ return "x"+Date.now().toString(36)+Math.random().toString(36).slice(2,5); }
+function daysToFlight(){
+  const t = tzParts(IL_TZ).date, dep = TRIP.outbound.depISO.slice(0,10);
+  return Math.round((new Date(dep+"T00:00:00Z") - new Date(t+"T00:00:00Z"))/86400000);
+}
+function daysWord(n){ return n===1 ? "יום אחד" : n===2 ? "יומיים" : n+" ימים"; }
+
+/* =========================== ניווט =========================== */
+const SECTIONS = ["today","plan","flights","tasks","taste","pack","money","info","settings"];
+let CUR = "today";
+function go(sec){
+  if(SECTIONS.indexOf(sec)<0) sec = "today";
+  CUR = sec;
+  SECTIONS.forEach(s=> $("#sec-"+s).classList.toggle("on", s===sec));
+  $$("#nav a").forEach(a=> a.classList.toggle("active", a.dataset.sec===sec));
+  closeDrawer();
+  try{ window.scrollTo(0,0); }catch(e){}
+  renderAll();
+}
+function openDrawer(){ $("#drawer").classList.add("on"); $("#scrim").classList.add("on"); $("#burger").classList.add("on"); $("#burger").setAttribute("aria-expanded","true"); document.body.classList.add("locked"); }
+function closeDrawer(){ $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); $("#burger").classList.remove("on"); $("#burger").setAttribute("aria-expanded","false"); document.body.classList.remove("locked"); }
+$("#burger").addEventListener("click", ()=> $("#drawer").classList.contains("on") ? closeDrawer() : openDrawer());
+$("#scrim").addEventListener("click", closeDrawer);
+$$("#nav a").forEach(a=> a.addEventListener("click", e=>{ e.preventDefault(); location.hash = "#"+a.dataset.sec; }));
+window.addEventListener("hashchange", ()=> go((location.hash||"#today").slice(1)));
+
+/* =========================== שעונים וספירה לאחור =========================== */
+function tickClocks(){
+  $("#clkIL").textContent = tzParts(IL_TZ).time;
+  $("#clkNL").textContent = tzParts(AMS.tz).time;
+}
+function renderPass(){
+  const dep = new Date(TRIP.outbound.depISO).getTime();
+  const back = new Date(TRIP.inbound.arrISO).getTime();
+  const now = Date.now();
+  let cd = "", line = "";
+  if(now < dep){
+    let s = Math.floor((dep-now)/1000);
+    const d = Math.floor(s/86400); s-=d*86400;
+    const h = Math.floor(s/3600); s-=h*3600;
+    const m = Math.floor(s/60); s-=m*60;
+    cd = `<div class="cdown">
+      <div><b>${d}</b><span>ימים</span></div>
+      <div><b>${pad(h)}</b><span>שעות</span></div>
+      <div><b>${pad(m)}</b><span>דקות</span></div>
+      <div><b>${pad(s)}</b><span>שניות</span></div></div>`;
+    const cal = daysToFlight();
+    line = cal<=0 ? "היום טסים. באמת." : cal===1 ? "מחר בשעה הזו כבר באוויר" : "עד ההמראה מנתב״ג";
+  } else if(now < back){
+    const idx = dayIndexOf(tzParts(AMS.tz).date);
+    const n = idx<0 ? 1 : idx+1;
+    cd = `<div class="cdown"><div style="flex:3"><b>יום ${n} מתוך ${S.days.length}</b><span>אנחנו באמסטרדם</span></div>
+      <div><b>${tzParts(AMS.tz).time}</b><span>שעה מקומית</span></div></div>`;
+    line = "תיהנו. הכל מסודר.";
+  } else {
+    cd = `<div class="cdown"><div style="flex:1"><b>נחתנו</b><span>הטיול הסתיים</span></div></div>`;
+    line = "עכשיו רק נשאר לאכול את הגבינות";
+  }
+  $("#pass").innerHTML = `
+    <div class="stripe"><i></i><i></i><i></i></div>
+    <div class="pass-top">
+      <div class="pass-eyebrow">Arkia ${esc(TRIP.outbound.no)} · Boarding pass</div>
+      <div class="route">
+        <div><div class="code">TLV</div><div class="city">TEL AVIV</div></div>
+        <div class="plane"><span>✈</span></div>
+        <div style="text-align:left"><div class="code">AMS</div><div class="city">AMSTERDAM</div></div>
+      </div>
+    </div>
+    <div class="perf"><i></i></div>
+    <div class="pass-bot">
+      ${cd}
+      <div class="cd-line">${line}</div>
+      <div class="pass-meta">
+        <div><span>המראה</span><b>31.8 · 14:30</b></div>
+        <div><span>התייצבות</span><b>11:30 · טרמינל 1</b></div>
+        <div><span>הזמנה</span><b>13292424</b></div>
+      </div>
+    </div>`;
+}
+
+/* =========================== מזג אוויר =========================== */
+let WX = null;
+const WXCODE = {0:["☀️","בהיר"],1:["🌤️","בהיר בעיקר"],2:["⛅","מעונן חלקית"],3:["☁️","מעונן"],45:["🌫️","ערפל"],48:["🌫️","ערפל"],
+51:["🌦️","טפטוף קל"],53:["🌦️","טפטוף"],55:["🌧️","טפטוף חזק"],61:["🌧️","גשם קל"],63:["🌧️","גשם"],65:["🌧️","גשם חזק"],
+71:["🌨️","שלג"],80:["🌦️","ממטרים"],81:["🌧️","ממטרים"],82:["⛈️","ממטרים עזים"],95:["⛈️","סופת רעמים"],96:["⛈️","סופת רעמים"]};
+function wxOf(c){ return WXCODE[c] || ["🌥️","משתנה"]; }
+async function loadWeather(){
+  try{
+    const a = S.days[0].date, b = S.days[S.days.length-1].date;
+    const u = `https://api.open-meteo.com/v1/forecast?latitude=${AMS.lat}&longitude=${AMS.lon}`+
+      `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max`+
+      `&current=temperature_2m,weather_code&timezone=${encodeURIComponent(AMS.tz)}&start_date=${a}&end_date=${b}`;
+    const r = await fetch(u);
+    if(!r.ok) throw 0;
+    WX = await r.json();
+    renderAll();
+  }catch(e){ WX = null; }
+}
+function wxForDate(iso){
+  if(!WX || !WX.daily) return null;
+  const i = WX.daily.time.indexOf(iso);
+  if(i<0) return null;
+  const [em,txt] = wxOf(WX.daily.weather_code[i]);
+  return { em, txt, max:Math.round(WX.daily.temperature_2m_max[i]), min:Math.round(WX.daily.temperature_2m_min[i]),
+           rain: WX.daily.precipitation_probability_max[i] };
+}
+
+/* =========================== כרטיס פעילות =========================== */
+function endMinutes(t){
+  const m = String(t||"").match(/(\d{1,2}):(\d{2})\D+(\d{1,2}):(\d{2})/);
+  return m ? (+m[3])*60 + (+m[4]) : startMinutes(t)+60;
+}
+function itemHTML(it, dayId, dayDate, opts){
+  opts = opts||{};
+  const done = !!S.itemDone[it.id];
+  let live = false;
+  if(dayDate === tzParts(AMS.tz).date && inTrip()){
+    const [h,mi] = tzParts(AMS.tz).time.split(":").map(Number);
+    const now = h*60+mi;
+    live = now >= startMinutes(it.time) && now < endMinutes(it.time);
+  }
+  const note = esc(it.note).replace(/\n/g,"<br>");
+  return `<article class="item ${done?"done":""} ${live?"live":""}" data-item="${it.id}" data-day="${dayId}">
+    <div class="it-top">
+      <span class="it-time">${esc(it.time)}</span>
+      <h3 class="it-title">${esc(it.title)}</h3>
+      <button class="tick" data-act="item-done" data-id="${it.id}" aria-label="סימון כבוצע">✓</button>
+    </div>
+    <div class="it-place">
+      ${it.map ? `<a class="chip map" target="_blank" rel="noopener" href="${esc(it.map)}">🗺️ ${esc(it.place||"ניווט")}</a>`
+               : (it.place?`<span class="chip ghost">📍 ${esc(it.place)}</span>`:"")}
+      ${it.bookUrl ? `<a class="chip book" target="_blank" rel="noopener" href="${esc(it.bookUrl)}">🎫 ${esc(it.book||"הזמנת כרטיסים")}</a>`
+                   : (it.book?`<span class="chip ghost">🎫 ${esc(it.book)}</span>`:"")}
+    </div>
+    ${it.note ? `<div class="it-note">${note}</div>` : ""}
+    ${opts.edit!==false ? `<div class="it-actions">
+      <button class="mini" data-act="item-up" data-id="${it.id}" aria-label="הזזה למעלה">↑</button>
+      <button class="mini" data-act="item-down" data-id="${it.id}" aria-label="הזזה למטה">↓</button>
+      <button class="mini" data-act="item-edit" data-id="${it.id}" aria-label="עריכה">✎</button>
+      <button class="mini" data-act="item-del" data-id="${it.id}" aria-label="מחיקה">🗑</button>
+    </div>` : ""}
+  </article>`;
+}
+
+/* =========================== היום =========================== */
+function renderToday(){
+  const today = tzParts(AMS.tz).date;
+  const idx = dayIndexOf(today);
+  const wx = wxForDate(today);
+  const before = today < S.days[0].date;
+  const after  = today > S.days[S.days.length-1].date;
+
+  /* התראות */
+  let al = "";
+  const changed = Object.keys(S.status).filter(k=>S.status[k].state!=="ok");
+  changed.forEach(k=>{
+    const st = S.status[k];
+    al += `<div class="alertbar"><span>⚠️</span><div><b>${k}: ${st.state==="delay"?"עיכוב":st.state==="gate"?"שינוי שער/טרמינל":"שינוי בטיסה"}</b>
+      ${st.note?`<div style="font-size:13px;opacity:.9">${esc(st.note)}</div>`:""}</div></div>`;
+  });
+  const openCheckin = checkinWindow();
+  if(openCheckin) al += `<div class="alertbar" style="background:var(--oranje)"><span>🛫</span><div><b>הצ׳ק־אין האונליין פתוח עכשיו</b>
+    <div style="font-size:13px;opacity:.92">${esc(openCheckin)}</div></div></div>`;
+  $("#alerts").innerHTML = al;
+
+  /* כותרת היום */
+  let title, sub, brief;
+  if(before){
+    const d = daysToFlight();
+    title = prettyDate(tzParts(IL_TZ).date);
+    sub = d>1 ? `עוד ${d} לילות שינה עד אמסטרדם` : d===1 ? "עוד לילה אחד ואנחנו שם" : "היום טסים ✈️";
+    const pend = S.tasks.filter(t=>!S.taskDone[t.id]).length;
+    brief = pend ? `נשארו ${pend} משימות פתוחות לפני הטיסה. הכי דחוף: ${esc(nextTask().title)}.`
+                 : "הכל סגור ומסודר. עכשיו רק לספור ימים.";
+  } else if(after){
+    title = "חזרנו";
+    sub = "הטיול הסתיים";
+    brief = "נשארו התמונות, הגבינות ופאי התפוחים ההוא מ-Winkel 43.";
+  } else {
+    const day = S.days[idx];
+    title = prettyDate(today);
+    sub = `יום ${idx+1} מתוך ${S.days.length} באמסטרדם`;
+    brief = day.brief;
+  }
+  $("#todayHead").innerHTML = `
+    <div class="band"><div class="d">${esc(title)}</div><div class="n">${esc(sub)}</div></div>
+    <div class="body">
+      <div class="brief">${esc(brief)}</div>
+      ${wx ? `<div class="wx"><span class="big">${wx.em}</span><div>${wx.txt} · ${wx.max}° / ${wx.min}° · סיכוי לגשם ${wx.rain}%</div></div>`
+           : `<div class="wx"><span class="big">🌥️</span><div>תחזית לאמסטרדם תופיע כאן כשהיא תתעדכן</div></div>`}
+      ${nowUp(idx)}
+    </div>`;
+
+  /* פעילויות היום */
+  if(idx>=0){
+    const day = S.days[idx];
+    $("#todayList").innerHTML = `<div class="sec-title"><div><div class="kicker">Today</div><h2>מה יש לנו היום</h2></div></div>` +
+      day.items.map(it=>itemHTML(it, day.id, day.date, {edit:false})).join("");
+  } else {
+    const day = S.days[0];
+    $("#todayList").innerHTML = `<div class="sec-title"><div><div class="kicker">First day</div><h2>היום הראשון בטיול</h2></div></div>` +
+      day.items.map(it=>itemHTML(it, day.id, day.date, {edit:false})).join("");
+  }
+
+  /* משימות דחופות */
+  const pend = S.tasks.filter(t=>!S.taskDone[t.id]).sort((a,b)=>(a.due||"").localeCompare(b.due||"")).slice(0,4);
+  $("#todayTasks").innerHTML = pend.length
+    ? `<h2>מה עוד פתוח</h2><div class="sub" style="margin-bottom:6px">4 המשימות הקרובות</div>` +
+      pend.map(t=>taskHTML(t)).join("") +
+      `<a class="btn ghost wide sm" style="margin-top:12px" href="#tasks">לכל המשימות</a>`
+    : `<h2>אין משימות פתוחות</h2><div class="sub">הכל מסומן. מרשים.</div>`;
+}
+function nowUp(idx){
+  if(idx<0) return "";
+  const day = S.days[idx];
+  const [h,mi] = tzParts(AMS.tz).time.split(":").map(Number);
+  const now = h*60+mi;
+  let cur = day.items.find(it=> now>=startMinutes(it.time) && now<endMinutes(it.time) && !S.itemDone[it.id]);
+  let lbl = "עכשיו";
+  if(!cur){ cur = day.items.find(it=> startMinutes(it.time) > now); lbl = "הבא בתור"; }
+  if(!cur) return "";
+  return `<div class="now-up"><div class="lbl">${lbl}</div><div class="t">${esc(cur.title)}</div>
+    <div class="m">${esc(cur.time)}${cur.place?" · "+esc(cur.place):""}</div></div>`;
+}
+function nextTask(){
+  const p = S.tasks.filter(t=>!S.taskDone[t.id]).sort((a,b)=>(a.due||"").localeCompare(b.due||""));
+  return p[0] || {title:"—"};
+}
+function checkinWindow(){
+  const now = Date.now();
+  const a = new Date(TRIP.outbound.depISO).getTime(), b = new Date(TRIP.inbound.depISO).getTime();
+  if(now > a-24*3600e3 && now < a-6*3600e3 && !S.taskDone["t13"]) return "לטיסה הלוך IZ 513. נסגר 6 שעות לפני ההמראה.";
+  if(now > b-24*3600e3 && now < b-6*3600e3 && !S.taskDone["t14"]) return "לטיסה חזור IZ 514. נסגר 6 שעות לפני ההמראה.";
+  return "";
+}
+
+/* =========================== הלוז =========================== */
+let PLANDAY = null;
+function renderPlan(){
+  const today = tzParts(AMS.tz).date;
+  if(!PLANDAY){ const i = dayIndexOf(today); PLANDAY = S.days[i>=0?i:0].id; }
+  const day = S.days.find(d=>d.id===PLANDAY) || S.days[0];
+  $("#dayTabs").innerHTML = S.days.map(d=>{
+    const w = wxForDate(d.date);
+    return `<button class="daytab ${d.id===day.id?"on":""} ${d.date===today?"today":""}" data-act="day" data-id="${d.id}">
+      <b>${shortDate(d.date)}</b><span>${esc(d.label.replace("יום ",""))}${w?" "+w.em:""}</span></button>`;
+  }).join("");
+  const w = wxForDate(day.date);
+  const doneCount = day.items.filter(i=>S.itemDone[i.id]).length;
+  $("#dayHead").innerHTML = `<div class="card">
+    <div class="eyebrow">${esc(day.label)} · ${shortDate(day.date)}${w?` · ${w.em} ${w.max}°/${w.min}°`:""}</div>
+    <textarea class="i" data-act="brief" data-id="${day.id}" style="min-height:64px" placeholder="בריף קצר ליום">${esc(day.brief)}</textarea>
+    <div class="sub" style="margin-top:8px">${doneCount}/${day.items.length} פעילויות סומנו · אפשר לערוך את הבריף ישירות</div>
+  </div>`;
+  $("#dayItems").innerHTML = day.items.length
+    ? day.items.map(it=>itemHTML(it, day.id, day.date)).join("")
+    : `<div class="empty">אין עדיין פעילויות ליום הזה. הוסיפו את הראשונה למטה.</div>`;
+}
+
+/* =========================== טיסות =========================== */
+function flightCard(f, key){
+  const st = S.status[key.replace(" ","")] || {state:"ok",note:"",by:"",at:0};
+  const dep = new Date(f.depISO), arr = new Date(f.arrISO);
+  const depT = tzParts(f.from==="TLV"?IL_TZ:AMS.tz, dep);
+  const arrT = tzParts(f.to==="TLV"?IL_TZ:AMS.tz, arr);
+  const cls = st.state==="ok" ? "ok" : st.state==="cancel" ? "bad" : "warn";
+  const stTxt = {ok:"הכל כרגיל",delay:"עיכוב",gate:"שינוי שער או טרמינל",cancel:"שינוי משמעותי / ביטול"}[st.state];
+  const q = f.no.replace(" ","");
+  return `<div class="fl">
+    <div class="fh"><span>✈️</span><b>${esc(f.no)}</b><span style="opacity:.7;font-size:12px">${f.from} → ${f.to}</span><span class="no">הזמנה ${esc(f.pnr)}</span></div>
+    <div class="fb">
+      <div class="legs">
+        <div class="leg"><div class="ap">${f.from}</div><div class="tm">${depT.time}</div><div class="dt">${esc(f.fromName)} · ${shortDate(depT.date)}</div></div>
+        <div class="arrow">✈</div>
+        <div class="leg l2"><div class="ap">${f.to}</div><div class="tm">${arrT.time}</div><div class="dt">${esc(f.toName)} · ${shortDate(arrT.date)}</div></div>
+      </div>
+      <div class="grid2">
+        <div class="kv"><span>התייצבות</span><b>${esc(f.meet)}</b></div>
+        <div class="kv"><span>טרמינל</span><b>${esc(f.terminal)}</b></div>
+        <div class="kv"><span>כבודה · דור</span><b>מזוודה 20 ק״ג</b></div>
+        <div class="kv"><span>כבודה · בר</span><b>תיק יד בלבד</b></div>
+      </div>
+      <div class="sub" style="margin-top:9px;font-size:12px">${esc(f.op)}</div>
+      <div class="statusbox ${cls}">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <b>${stTxt}</b>
+          ${st.at?`<span class="sub" style="font-size:11.5px">עודכן ${new Date(st.at).toLocaleString("he-IL",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</span>`:""}
+          <button class="btn ghost sm" style="margin-inline-start:auto" data-act="status" data-id="${q}">עדכון מצב</button>
+        </div>
+        ${st.note?`<div style="margin-top:7px;font-size:13.5px">${esc(st.note)}</div>`:""}
+      </div>
+      <div class="linkrow">
+        <a class="chip book" target="_blank" rel="noopener" href="https://ssr.arkia.co.il/he/content/checkin">🎫 צ׳ק־אין אונליין</a>
+        <a class="chip" target="_blank" rel="noopener" href="https://www.flightradar24.com/data/flights/${q.toLowerCase()}">📡 מצב הטיסה בזמן אמת</a>
+        <a class="chip" target="_blank" rel="noopener" href="${f.from==="TLV"?"https://www.iaa.gov.il/airports/ben-gurion/flight-board/?flightType=departures":"https://www.schiphol.nl/en/departures/"}">🛫 לוח טיסות</a>
+        <a class="chip" target="_blank" rel="noopener" href="https://www.arkia.com/">🇮🇱 אתר ארקיע</a>
+      </div>
+    </div></div>`;
+}
+function renderFlights(){
+  $("#flightCards").innerHTML = flightCard(TRIP.outbound,"IZ513") + flightCard(TRIP.inbound,"IZ514");
+}
+
+/* =========================== משימות =========================== */
+function dueClass(t){
+  if(S.taskDone[t.id]) return "ok";
+  if(!t.due) return "";
+  const today = tzParts(IL_TZ).date;
+  if(t.due < today) return "late";
+  const diff = (new Date(t.due) - new Date(today))/86400000;
+  return diff<=3 ? "soon" : "";
+}
+function dueText(t){
+  if(!t.due) return "";
+  const today = tzParts(IL_TZ).date;
+  if(S.taskDone[t.id]) return "בוצע";
+  if(t.due===today) return "להיום";
+  if(t.due<today) return "באיחור · " + shortDate(t.due);
+  const diff = Math.round((new Date(t.due) - new Date(today))/86400000);
+  return diff===1 ? "מחר" : `עוד ${diff} ימים`;
+}
+function taskHTML(t){
+  const done = !!S.taskDone[t.id];
+  return `<div class="task ${done?"done":""}">
+    <button class="tick" data-act="task-done" data-id="${t.id}" aria-label="סימון">✓</button>
+    <div style="flex:1;min-width:0">
+      <div class="tt">${esc(t.title)}</div>
+      ${t.note?`<div class="tmeta" style="display:block">${esc(t.note)}</div>`:""}
+      <div class="tmeta">
+        ${t.due?`<span class="due ${dueClass(t)}">${dueText(t)}</span>`:""}
+        ${t.url?`<a class="chip book" style="padding:3px 9px;font-size:12px" target="_blank" rel="noopener" href="${esc(t.url)}">להזמנה ↗</a>`:""}
+        <button class="mini" style="width:26px;height:24px;font-size:12px" data-act="task-edit" data-id="${t.id}">✎</button>
+        <button class="mini" style="width:26px;height:24px;font-size:12px" data-act="task-del" data-id="${t.id}">🗑</button>
+      </div>
+    </div></div>`;
+}
+function renderTasks(){
+  const groups = {};
+  S.tasks.forEach(t=>{ (groups[t.grp||"כללי"] = groups[t.grp||"כללי"]||[]).push(t); });
+  const order = ["הזמנות","לפני היציאה","צ׳ק־אין","בטיול"];
+  const keys = Object.keys(groups).sort((a,b)=>{
+    const ia=order.indexOf(a), ib=order.indexOf(b);
+    return (ia<0?99:ia)-(ib<0?99:ib);
+  });
+  const doneN = S.tasks.filter(t=>S.taskDone[t.id]).length;
+  $("#taskList").innerHTML = `<div class="sub" style="margin-bottom:4px">${doneN} מתוך ${S.tasks.length} הושלמו</div>` +
+    keys.map(k=>`<div class="grp">${esc(k)}</div>` +
+      groups[k].sort((a,b)=>(S.taskDone[a.id]?1:0)-(S.taskDone[b.id]?1:0) || (a.due||"").localeCompare(b.due||""))
+               .map(taskHTML).join("")).join("");
+  const pend = S.tasks.filter(t=>!S.taskDone[t.id]).length;
+  const b = $("#badgeTasks");
+  b.textContent = pend; b.style.display = pend? "grid":"none";
+}
+
+/* =========================== חובה לטעום =========================== */
+function renderTaste(){
+  const n = S.tastes.filter(t=>S.tasteDone[t.id]).length;
+  $("#tasteScore").textContent = `${n} מתוך ${S.tastes.length} נטעמו`;
+  $("#stampGrid").innerHTML = S.tastes.map(t=>`
+    <button class="stamp ${S.tasteDone[t.id]?"on":""}" data-act="taste" data-id="${t.id}">
+      <span class="em">${t.em}</span><span class="nm">${esc(t.nm)}</span><span class="wh">${esc(t.wh)}</span>
+    </button>`).join("");
+}
+
+/* =========================== אריזה =========================== */
+function renderPack(){
+  $("#packList").innerHTML = Object.keys(S.pack).map(cat=>{
+    const items = S.pack[cat];
+    const done = items.filter(i=>S.packDone[cat+"|"+i]).length;
+    return `<div class="card"><h2>${esc(cat)}</h2>
+      <div class="sub" style="margin-bottom:6px">${done}/${items.length} ארוז</div>
+      ${items.map(i=>`<div class="task ${S.packDone[cat+"|"+i]?"done":""}">
+        <button class="tick" data-act="pack" data-id="${esc(cat+"|"+i)}" aria-label="סימון">✓</button>
+        <div style="flex:1"><div class="tt" style="font-weight:400">${esc(i)}</div></div>
+        <button class="mini" style="width:26px;height:24px;font-size:12px" data-act="pack-del" data-id="${esc(cat+"|"+i)}">🗑</button>
+      </div>`).join("")}</div>`;
+  }).join("");
+}
+
+/* =========================== תקציב =========================== */
+function renderMoney(){
+  const tot = S.expenses.reduce((s,e)=>s+(+e.amt||0),0);
+  const byCat = {};
+  S.expenses.forEach(e=> byCat[e.cat||"אחר"] = (byCat[e.cat||"אחר"]||0)+(+e.amt||0));
+  $("#moneyBox").innerHTML = `
+    <h2>מה הוצאנו</h2>
+    <div class="sub" style="margin-bottom:10px">הכל ביורו. ההמרה לשקלים לפי שער שאפשר לעדכן.</div>
+    <div class="tot"><span>סה״כ בטיול</span><b>€${tot.toFixed(0)} <span style="font-size:14px;opacity:.7">≈ ₪${(tot*(S.rate||4)).toFixed(0)}</span></b></div>
+    <label class="f" style="margin-top:12px"><span>שער המרה (₪ ל-€1)</span>
+      <input class="i" type="number" step="0.01" value="${S.rate}" data-act="rate"></label>
+    ${Object.keys(byCat).length?`<div class="grp">לפי קטגוריה</div>`+
+      Object.keys(byCat).map(c=>`<div class="money"><span>${esc(c)}</span><span class="amt">€${byCat[c].toFixed(0)}</span></div>`).join(""):""}
+    <div class="grp">הוצאות</div>
+    ${S.expenses.length ? S.expenses.slice().reverse().map(e=>`<div class="money">
+        <span>${esc(e.title)} <span class="sub" style="font-size:11.5px">${esc(e.cat||"")}${e.date?" · "+shortDate(e.date):""}</span></span>
+        <span class="amt">€${(+e.amt).toFixed(0)} <button class="mini" style="width:24px;height:22px;font-size:11px" data-act="exp-del" data-id="${e.id}">🗑</button></span>
+      </div>`).join("") : `<div class="empty">עדיין לא רשמנו כלום</div>`}
+    <button class="btn o wide" style="margin-top:14px" data-act="exp-add">＋ הוספת הוצאה</button>`;
+}
+
+/* =========================== סנכרון =========================== */
+function paintSync(){
+  const box = $("#syncBox"); if(!box) return;
+  const on = cloud.on && cloud.ready;
+  box.innerHTML = `<h2>מצב הסנכרון</h2>
+    <div class="sync" style="margin:8px 0 12px"><span class="dot ${on?"live":"local"}"></span>
+      ${on ? "מחובר לענן — כל שינוי מופיע אצל שניכם" : firebaseConfig.projectId ? "מנסה להתחבר לענן…" : "שמירה מקומית על המכשיר הזה בלבד"}</div>
+    <div class="sub">${on ? "השינויים נשמרים אוטומטית ומסתנכרנים בין המכשירים." :
+      "כדי שגם בר תראה את אותם סימונים ועדכונים, צריך למלא את פרטי Firebase בראש קובץ ה-HTML. ההוראות המלאות נמצאות במדריך שקיבלתם."}</div>
+    <div class="sub" style="margin-top:10px">מזהה המכשיר: ${CLIENT}</div>`;
+}
+
+/* =========================== רינדור כללי =========================== */
+function renderAll(){
+  renderPass();
+  if(CUR==="today") renderToday();
+  if(CUR==="plan") renderPlan();
+  if(CUR==="flights") renderFlights();
+  if(CUR==="taste") renderTaste();
+  if(CUR==="pack") renderPack();
+  if(CUR==="money") renderMoney();
+  if(CUR==="settings") paintSync();
+  renderTasks();
+  const d = daysToFlight();
+  $("#drawerSub").textContent = inTrip() ? "אנחנו שם 🧡" : d>1 ? `עוד ${d} לילות עד אמסטרדם` : d===1 ? "עוד לילה אחד" : d===0 ? "היום טסים ✈️" : "היינו שם";
+  const nb = $("#notesBox"); if(nb && nb.value!==S.notes && document.activeElement!==nb) nb.value = S.notes||"";
+}
+
+/* =========================== חלונית עריכה =========================== */
+function openSheet(html){
+  $("#sheetPanel").innerHTML = `<div class="grab"></div>` + html;
+  $("#sheet").classList.add("on");
+  document.body.classList.add("locked");
+}
+function closeSheet(){ $("#sheet").classList.remove("on"); document.body.classList.remove("locked"); }
+$("#sheet").addEventListener("click", e=>{ if(e.target.dataset.close) closeSheet(); });
+
+function findItem(id){
+  for(const d of S.days){ const i = d.items.findIndex(x=>x.id===id); if(i>=0) return {day:d,i,it:d.items[i]}; }
+  return null;
+}
+function itemSheet(id, dayId){
+  const f = id ? findItem(id) : null;
+  const it = f ? f.it : {time:"",title:"",place:"",map:"",note:"",book:"",bookUrl:""};
+  openSheet(`<h3>${id?"עריכת פעילות":"פעילות חדשה"}</h3>
+    <label class="f"><span>שעות</span><input class="i" id="f_time" value="${esc(it.time)}" placeholder="10:00 – 12:00"></label>
+    <label class="f"><span>מה עושים</span><input class="i" id="f_title" value="${esc(it.title)}"></label>
+    <label class="f"><span>מקום</span><input class="i" id="f_place" value="${esc(it.place)}" placeholder="Van Gogh Museum"></label>
+    <label class="f"><span>קישור לניווט</span><input class="i" id="f_map" value="${esc(it.map)}" placeholder="הדבקת קישור מגוגל מפות"></label>
+    <label class="f"><span>הערות</span><textarea class="i" id="f_note">${esc(it.note)}</textarea></label>
+    <div class="row2">
+      <label class="f"><span>טקסט להזמנה</span><input class="i" id="f_book" value="${esc(it.book)}"></label>
+      <label class="f"><span>קישור להזמנה</span><input class="i" id="f_bookUrl" value="${esc(it.bookUrl)}"></label>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:6px">
+      <button class="btn wide" data-act="item-save" data-id="${id||""}" data-day="${dayId||""}">שמירה</button>
+      <button class="btn ghost" data-close="1">ביטול</button>
+    </div>
+    <div class="sub" style="margin-top:12px">טיפ: אם אין קישור מוכן, כתבו את שם המקום ואפשר להשאיר את שדה הניווט ריק — נוסיף אותו אחר כך.</div>`);
+  setTimeout(()=>$("#f_title").focus(),150);
+}
+function taskSheet(id){
+  const t = id ? S.tasks.find(x=>x.id===id) : {title:"",note:"",url:"",due:"",grp:"לפני היציאה"};
+  openSheet(`<h3>${id?"עריכת משימה":"משימה חדשה"}</h3>
+    <label class="f"><span>מה צריך לעשות</span><input class="i" id="k_title" value="${esc(t.title)}"></label>
+    <label class="f"><span>פירוט</span><textarea class="i" id="k_note">${esc(t.note)}</textarea></label>
+    <div class="row2">
+      <label class="f"><span>תאריך יעד</span><input class="i" type="date" id="k_due" value="${esc(t.due)}"></label>
+      <label class="f"><span>קטגוריה</span><select class="i" id="k_grp">
+        ${["הזמנות","לפני היציאה","צ׳ק־אין","בטיול","כללי"].map(g=>`<option ${g===t.grp?"selected":""}>${g}</option>`).join("")}
+      </select></label>
+    </div>
+    <label class="f"><span>קישור</span><input class="i" id="k_url" value="${esc(t.url)}"></label>
+    <div style="display:flex;gap:8px;margin-top:6px">
+      <button class="btn wide" data-act="task-save" data-id="${id||""}">שמירה</button>
+      <button class="btn ghost" data-close="1">ביטול</button>
+    </div>`);
+  setTimeout(()=>$("#k_title").focus(),150);
+}
+function statusSheet(key){
+  const st = S.status[key];
+  openSheet(`<h3>עדכון מצב ${key==="IZ513"?"טיסת ההלוך":"טיסת החזור"}</h3>
+    <div class="sub" style="margin-bottom:12px">מה שמעדכנים כאן יופיע מיד גם אצל בר, ובראש מסך הבית.</div>
+    <label class="f"><span>מצב</span><select class="i" id="s_state">
+      <option value="ok" ${st.state==="ok"?"selected":""}>הכל כרגיל</option>
+      <option value="delay" ${st.state==="delay"?"selected":""}>עיכוב</option>
+      <option value="gate" ${st.state==="gate"?"selected":""}>שינוי שער או טרמינל</option>
+      <option value="cancel" ${st.state==="cancel"?"selected":""}>שינוי משמעותי / ביטול</option>
+    </select></label>
+    <label class="f"><span>פרטים</span><textarea class="i" id="s_note" placeholder="הועברה ל-16:10, שער D7">${esc(st.note)}</textarea></label>
+    <div style="display:flex;gap:8px">
+      <button class="btn wide" data-act="status-save" data-id="${key}">שמירה</button>
+      <button class="btn ghost" data-close="1">ביטול</button>
+    </div>`);
+}
+function expenseSheet(){
+  openSheet(`<h3>הוצאה חדשה</h3>
+    <label class="f"><span>על מה</span><input class="i" id="e_title" placeholder="ארוחת ערב בפודהאלן"></label>
+    <div class="row2">
+      <label class="f"><span>כמה (€)</span><input class="i" type="number" inputmode="decimal" id="e_amt"></label>
+      <label class="f"><span>קטגוריה</span><select class="i" id="e_cat">
+        ${["אוכל","אטרקציות","תחבורה","קניות","לינה","אחר"].map(c=>`<option>${c}</option>`).join("")}</select></label>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn wide" data-act="exp-save">הוספה</button>
+      <button class="btn ghost" data-close="1">ביטול</button>
+    </div>`);
+  setTimeout(()=>$("#e_title").focus(),150);
+}
+function packSheet(){
+  openSheet(`<h3>פריט לאריזה</h3>
+    <label class="f"><span>מה</span><input class="i" id="p_name" placeholder="מטרייה"></label>
+    <label class="f"><span>לאיזו רשימה</span><select class="i" id="p_cat">
+      ${Object.keys(S.pack).map(c=>`<option>${esc(c)}</option>`).join("")}</select></label>
+    <div style="display:flex;gap:8px">
+      <button class="btn wide" data-act="pack-save">הוספה</button>
+      <button class="btn ghost" data-close="1">ביטול</button>
+    </div>`);
+  setTimeout(()=>$("#p_name").focus(),150);
+}
+
+/* =========================== אירועים =========================== */
+document.addEventListener("click", e=>{
+  const el = e.target.closest("[data-act]");
+  if(!el) return;
+  const act = el.dataset.act, id = el.dataset.id;
+
+  if(act==="item-done"){ S.itemDone[id] = !S.itemDone[id]; save(); }
+  else if(act==="task-done"){ S.taskDone[id] = !S.taskDone[id]; save(); }
+  else if(act==="taste"){ S.tasteDone[id] = !S.tasteDone[id]; save(); if(S.tasteDone[id]) toast("נטעם ✓"); }
+  else if(act==="pack"){ S.packDone[id] = !S.packDone[id]; save(); }
+  else if(act==="pack-del"){ const [c,n]=id.split("|"); S.pack[c]=S.pack[c].filter(x=>x!==n); delete S.packDone[id]; save(); }
+  else if(act==="day"){ PLANDAY = id; renderPlan(); }
+  else if(act==="item-edit"){ itemSheet(id); }
+  else if(act==="item-del"){
+    const f = findItem(id); if(!f) return;
+    if(confirm("למחוק את הפעילות הזו?")){ f.day.items.splice(f.i,1); save(); toast("נמחק"); }
+  }
+  else if(act==="item-up" || act==="item-down"){
+    const f = findItem(id); if(!f) return;
+    const j = act==="item-up" ? f.i-1 : f.i+1;
+    if(j<0 || j>=f.day.items.length) return;
+    const arr = f.day.items; const tmp = arr[j]; arr[j]=arr[f.i]; arr[f.i]=tmp; save();
+  }
+  else if(act==="item-save"){
+    const dayId = el.dataset.day;
+    const data = { time:$("#f_time").value.trim(), title:$("#f_title").value.trim(), place:$("#f_place").value.trim(),
+      map:$("#f_map").value.trim(), note:$("#f_note").value, book:$("#f_book").value.trim(), bookUrl:$("#f_bookUrl").value.trim() };
+    if(!data.title){ toast("צריך לפחות שם לפעילות"); return; }
+    if(!data.map && data.place) data.map = M(encodeURIComponent(data.place+" Amsterdam"));
+    if(id){ const f = findItem(id); Object.assign(f.it, data); }
+    else { const d = S.days.find(x=>x.id===dayId) || S.days[0]; d.items.push(Object.assign({id:uid()}, data));
+           d.items.sort((a,b)=>startMinutes(a.time)-startMinutes(b.time)); }
+    closeSheet(); save(); toast("נשמר");
+  }
+  else if(act==="task-edit"){ taskSheet(id); }
+  else if(act==="task-del"){ if(confirm("למחוק את המשימה?")){ S.tasks = S.tasks.filter(t=>t.id!==id); save(); } }
+  else if(act==="task-save"){
+    const data = { title:$("#k_title").value.trim(), note:$("#k_note").value.trim(),
+      due:$("#k_due").value, grp:$("#k_grp").value, url:$("#k_url").value.trim() };
+    if(!data.title){ toast("צריך שם למשימה"); return; }
+    if(id){ Object.assign(S.tasks.find(t=>t.id===id), data); }
+    else S.tasks.push(Object.assign({id:uid()}, data));
+    closeSheet(); save(); toast("נשמר");
+  }
+  else if(act==="status"){ statusSheet(id); }
+  else if(act==="status-save"){
+    S.status[id] = { state:$("#s_state").value, note:$("#s_note").value.trim(), by:CLIENT, at:Date.now() };
+    closeSheet(); save(); toast("המצב עודכן");
+  }
+  else if(act==="exp-add"){ expenseSheet(); }
+  else if(act==="exp-save"){
+    const amt = parseFloat($("#e_amt").value);
+    if(!amt){ toast("צריך סכום"); return; }
+    S.expenses.push({ id:uid(), title:$("#e_title").value.trim()||"הוצאה", amt, cat:$("#e_cat").value, date:tzParts(AMS.tz).date });
+    closeSheet(); save();
+  }
+  else if(act==="exp-del"){ S.expenses = S.expenses.filter(x=>x.id!==id); save(); }
+  else if(act==="pack-save"){
+    const n = $("#p_name").value.trim(); if(!n){ toast("צריך שם לפריט"); return; }
+    S.pack[$("#p_cat").value].push(n); closeSheet(); save();
+  }
+});
+
+document.addEventListener("input", e=>{
+  const el = e.target;
+  if(el.dataset.act==="brief"){ const d = S.days.find(x=>x.id===el.dataset.id); if(d){ d.brief = el.value; save(true); } }
+  else if(el.dataset.act==="rate"){ S.rate = parseFloat(el.value)||4; save(true); }
+  else if(el.id==="notesBox"){ S.notes = el.value; save(true); }
+});
+
+$("#addItem").addEventListener("click", ()=> itemSheet(null, PLANDAY));
+$("#addTask").addEventListener("click", ()=> taskSheet(null));
+$("#addPack").addEventListener("click", packSheet);
+
+/* גיבוי */
+$("#expBtn").addEventListener("click", ()=>{
+  const blob = new Blob([JSON.stringify(S,null,2)],{type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = "amsterdam-2026-backup.json"; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+});
+$("#impBtn").addEventListener("click", ()=> $("#impFile").click());
+$("#impFile").addEventListener("change", e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = ()=>{ try{ S = merge(DEFAULTS, JSON.parse(r.result)); save(); toast("הגיבוי שוחזר"); }catch(err){ toast("הקובץ לא תקין"); } };
+  r.readAsText(f);
+});
+$("#resetBtn").addEventListener("click", ()=>{
+  if(confirm("לאפס הכל ולחזור ללוז המקורי? כל השינויים והסימונים יימחקו.")){
+    S = clone(DEFAULTS); save(); toast("חזרנו ללוז המקורי");
+  }
+});
+
+/* =========================== הפעלה =========================== */
+go((location.hash||"#today").slice(1));
+tickClocks(); setInterval(tickClocks, 10000);
+renderPass(); setInterval(renderPass, 1000);
+setInterval(()=>{ if(CUR==="today") renderToday(); }, 60000);
+loadWeather();
+initCloud();
+</script>
+</body>
+</html>
